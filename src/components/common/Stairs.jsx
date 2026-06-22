@@ -4,48 +4,48 @@ import { useGSAP } from '@gsap/react'
 import { useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 
-const Stairs = () => {
+const Stairs = (props ) => {
+
+    const currentPath = useLocation().pathname;
+    
 
     const stairParentRef = useRef(null);
-    const location = useLocation();
 
     useGSAP(() => {
 
-        const tl = gsap.timeline();
+    const tl = gsap.timeline();
+    tl.to(stairParentRef.current, {
+        display: "block"
+    });
 
-        tl.to(stairParentRef.current, {
-            display: "block"
-        });
+    tl.from('.stair', {
+        height: 0,
+        stagger: {
+            amount: -0.25
+        }
+    });
 
-        tl.from('.stair', {
-            height: 0,
-            stagger: {
-                amount: -0.25
-            }
-        });
+    tl.to('.stair', {
+        y: "100%",
+        stagger: {
+            amount: -0.25
+        }
+    });
 
-        tl.to('.stair', {
-            y: "100%",
-            stagger: {
-                amount: -0.25
-            }
-        });
+    tl.to(stairParentRef.current, {
+        display: "none"
+    });
 
-        tl.to(stairParentRef.current, {
-            display: "none"
-        });
+}, [currentPath]);
 
-        tl.to('.stair', {
-            y: "0%"
-        });
-
-    }, [location.pathname]);
-
+    console.log(props);
     return (
         <div>
+            {props.children}
+            <h1 className='text-blue-600'>Hero</h1>
             <div
                 ref={stairParentRef}
-                className='h-screen w-full fixed z-[9999] top-0 left-0 pointer-events-none'
+                className='h-screen w-full fixed top-0 z-20 '
             >
                 <div className='h-full w-full flex'>
                     <div className='stair h-full w-1/5 bg-black'></div>

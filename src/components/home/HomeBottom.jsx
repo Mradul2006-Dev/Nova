@@ -34,7 +34,7 @@ const HomeBottom = () => {
           w-[32vw]
           border-3
           rounded-full
-          border border-white
+          border: border-white
           text-white
           text-[6vw]
           leading-none
