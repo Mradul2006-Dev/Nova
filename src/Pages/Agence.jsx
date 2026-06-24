@@ -12,16 +12,16 @@ const Agence = () => {
   // gsap.registerPlugin(useGSAP);
 
   const imageArray = [
-  "/team/1.jpg",
-  "/team/2.jpg",
-  "/team/3.jpg",
-  "/team/4.jpg",
-  "/team/5.jpg",
-  "/team/6.jpg",
-  "/team/7.jpg",
-  "/team/8.jpg",
-  "/team/9.jpg",
-];
+    "/team/1.jpg",
+    "/team/2.jpg",
+    "/team/3.jpg",
+    "/team/4.jpg",
+    "/team/5.jpg",
+    "/team/6.jpg",
+    "/team/7.jpg",
+    "/team/8.jpg",
+    "/team/9.jpg",
+  ];
 
   React.useEffect(() => {
     imageArray.forEach((src) => {
@@ -37,8 +37,14 @@ const Agence = () => {
           trigger: imageDivRef.current,
           start: "top 26.15%",
           end: "top -126%",
-          scrub: true,
+          // scrub: true,
           pin: true,
+          pinSpacing: true,
+          pinReparent: true,
+          pinType: "transform",
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
 
           onUpdate: (self) => {
             const imageIndex = Math.min(
@@ -53,6 +59,9 @@ const Agence = () => {
               imageRef.current.src = imageArray[imageIndex];
             }
           },
+          onRefresh: () => {
+            console.log(imageDivRef.current.style.transform);
+          },
         },
       });
     },
@@ -61,10 +70,10 @@ const Agence = () => {
 
   return (
     <div>
-      <div className="section1">
+      <div className="section1 py-1">
         <div
           ref={imageDivRef}
-          className="absolute z-20 overflow-hidden h-[20vw] w-[15vw] rounded-[3vw] top-60 left-[30vw]"
+          className="absolute border-red-500 overflow-hidden h-[20vw] w-[15vw] rounded-[3vw] top-60 left-[30vw]"
         >
           <img
             className="h-full w-full object-cover"
@@ -73,7 +82,7 @@ const Agence = () => {
             alt="Soixan7e Douze"
           />
         </div>
-        <div className=" relative font-[font-2] z-50 ">
+        <div className=" relative font-[font-2] ">
           <div className="mt-[55vh]">
             <h1 className="text-[20vw] text-center uppercase leading-[17vw]">
               Soixan7e <br></br>

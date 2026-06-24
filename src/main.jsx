@@ -1,4 +1,4 @@
-// import { StrictMode } from 'react'
+import { StrictMode } from 'react'
 // import { createRoot } from 'react-dom/client'
 import React from "react"
 import './index.css'
@@ -6,14 +6,16 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import Stairs from './components/common/stairs.jsx'
-
+import NavbarContext from "./components/Context/NavbarContext.jsx"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Stairs>
+  <BrowserRouter>
+    <Stairs>
+      <NavbarContext>
         <App />
-      </Stairs>
-    </BrowserRouter>
-  </React.StrictMode>
+      </NavbarContext>
+    </Stairs>
+  </BrowserRouter>
 )
+
+

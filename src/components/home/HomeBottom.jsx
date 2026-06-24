@@ -11,7 +11,7 @@ const HomeBottom = () => {
           h-[6.2vw] 
           w-[32vw]
           rounded-full
-          border-3 border-white
+          border-4 border-white
           text-white
           text-[5.5vw]
           px-[3vw]
@@ -32,7 +32,7 @@ const HomeBottom = () => {
           flex items-center justify-center
           h-[6.2vw] 
           w-[32vw]
-          border-3
+          border-4
           rounded-full
           border: border-white
           text-white

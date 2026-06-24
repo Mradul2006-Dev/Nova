@@ -7,7 +7,7 @@ const HomeHero = () => {
         L'étincelle
       </div>
       <div className="text-[9.5vw] uppercase leading-[9.5vw] item-start justify-center flex item-center">
-        qui <div className="h-[8vw] w-[13vw] -mt-5 rounded-full overflow-hidden"><Vdo /></div> génère
+        qui <div className="h-[8vw] w-[13vw] rounded-full overflow-hidden"><Vdo /></div> génère
       </div>
       <div className="text-[9.5vw] uppercase leading-[9.5vw] justify-center flex item-center">
         la créativité

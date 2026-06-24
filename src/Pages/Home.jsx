@@ -8,7 +8,7 @@ const Home = () => {
       <div className="fixed h-screen w-screen">
         <Vdo />
       </div>
-      <div className="relative z-10 h-screen w-screen pb-3 overflow-hidden flex flex-col justify-between">
+      <div className="relative z-0 h-screen w-screen pb-3 overflow-hidden flex flex-col justify-between">
         <HomeHero />
         <HomeBottom />
       </div>
