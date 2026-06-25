@@ -5,48 +5,69 @@ import { NavbarContext } from "../Context/NavbarContext";
 
 const FullScreenNav = () => {
   const fullNavLinksRef = useRef(null);
-  const [navOpen, setNavOpen] = useContext(NavbarContext);
   const fullScreenRef = useRef(null);
-  const tlRef = useRef(null);
+  const [navOpen, setNavOpen] = useContext(NavbarContext);
 
-  // Build the timeline only ONCE, on mount
- useGSAP(() => {
-    const tl = gsap.timeline({ paused: true });
+  const tl = gsap.timeline();
 
-    tl.from(".stairing", {
-      height: 0,
-      duration: 0.5,
-      stagger: { amount: -0.2 },
+  function gsapAnimation() {
+    const tl = gsap.timeline();
+    tl.to(".fullscreennav", {
+      display: "block",
     });
-    tl.from(fullNavLinksRef.current, {
+    tl.to(".stairing", {
+        delay: 0.2,
+      height: "100%",
+      stagger: { amount: -0.3 },
+    });
+    tl.to(".link", {
       opacity: 1,
-    }, "-=0.3");
-    tl.from('.link', {
+      rotateX: 0,
+      stagger: { amount: 0.3 },
+    });
+    tl.to(".navlink", {
+      opacity: 1,
+    });
+  }
+
+  function gsapAnimationReverse() {
+    const tl = gsap.timeline();
+    tl.to(".link", {
       opacity: 0,
       rotateX: 90,
-      duration: 0.4,
-      stagger: { amount: 0.08 },
-    }, "-=0.4");
+      stagger: { amount: 0.25 },
+    });
+    tl.to(".stairing", {
+      height: 0,
+      stagger: { amount: -0.25 },
+    });
+    tl.to(".navlink", {
+      opacity: 0,
+    });
+    tl.to(".fullscreennav", {
+      display: "none",
+    });
+  }
 
-    tlRef.current = tl;
-  }, []); // <-- empty dependency, runs only once
+  useGSAP(
+    function () {
+      if (navOpen) {
+        gsap.to(".fullscreennav", {
+          display: "block",
+        });
+        gsapAnimation();
+      } else {
+        gsapAnimationReverse();
+      }
+    },
+    [navOpen],
+  );
 
-  // Just play/reverse on navOpen change, don't rebuild
-  useGSAP(() => {
-    if (!tlRef.current) return;
-
-    if (navOpen) {
-      fullNavLinksRef.current.style.display = "block";
-      tlRef.current.play();
-    } else {
-      tlRef.current.reverse();
-    }
-  }, [navOpen]);
   return (
     <div
       ref={fullScreenRef}
       id="fullscreennav"
-      className={`text-white h-screen w-full overflow-hidden absolute z-50 bg-black ${navOpen ? "" : "pointer-events-none invisible"}`}
+      className="fullscreennav hidden text-white h-screen w-full overflow-hidden absolute z-50"
     >
       <div className="h-screen w-screen fixed ">
         <div className="h-full w-full flex">
@@ -57,9 +78,8 @@ const FullScreenNav = () => {
           <div className="stairing h-full w-1/5 bg-black"></div>
         </div>
       </div>
-
       <div ref={fullNavLinksRef} className="relative">
-        <div className="flex w-full p-5 items-start justify-between">
+        <div className="navlink flex w-full p-5 items-start justify-between">
           <div className="">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -80,9 +100,8 @@ const FullScreenNav = () => {
             <div className="h-44 right-0 rotate-45 origin-top absolute w-0.5 bg-lime-300"></div>
           </div>
         </div>
-
-        <div className="py-30" style={{ perspective: "1000px" }}>
-          <div className="link origin-top relative border-y-1 border-white ">
+        <div className="py-36">
+          <div className="link origin-top relative border-t-1 border-white ">
             <h1 className="font-[font-2] text-[7vw] uppercase leading-[0.8] pt-5 text-center">
               Projects
             </h1>
@@ -126,7 +145,7 @@ const FullScreenNav = () => {
             </div>
           </div>
 
-          <div className="link origin-top relative border-y-1 border-white ">
+          <div className="link origin-top relative border-t-1 border-white ">
             <h1 className="font-[font-2] text-[7vw] uppercase leading-[0.8] pt-5 text-center">
               Agence
             </h1>
@@ -170,7 +189,7 @@ const FullScreenNav = () => {
             </div>
           </div>
 
-          <div className="link origin-top relative border-y-1 border-white ">
+          <div className="link origin-top relative border-t-1 border-white ">
             <h1 className="font-[font-2] text-[7vw] uppercase leading-[0.8] pt-5 text-center">
               Contacts
             </h1>
@@ -214,7 +233,7 @@ const FullScreenNav = () => {
             </div>
           </div>
 
-          <div className="link origin-top relative border-y-1 border-white ">
+          <div className="link origin-top relative border-t-1 border-white ">
             <h1 className="font-[font-2] text-[7vw] uppercase leading-[0.8] pt-5 text-center">
               Blog
             </h1>
