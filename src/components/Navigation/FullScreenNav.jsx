@@ -10,21 +10,23 @@ const FullScreenNav = () => {
   const tlRef = useRef(null);
 
   // Build the timeline only ONCE, on mount
-  useGSAP(() => {
+ useGSAP(() => {
     const tl = gsap.timeline({ paused: true });
 
     tl.from(".stairing", {
       height: 0,
-      stagger: { amount: -0.25 },
+      duration: 0.5,
+      stagger: { amount: -0.2 },
     });
     tl.from(fullNavLinksRef.current, {
       opacity: 1,
-    });
+    }, "-=0.3");
     tl.from('.link', {
       opacity: 0,
       rotateX: 90,
-      stagger: { amount: 0.25 },
-    },"-=0.2");
+      duration: 0.4,
+      stagger: { amount: 0.08 },
+    }, "-=0.4");
 
     tlRef.current = tl;
   }, []); // <-- empty dependency, runs only once
@@ -73,7 +75,7 @@ const FullScreenNav = () => {
               ></path>
             </svg>
           </div>
-          <div className="h-32 w-32 relative cursor-pointer ">
+          <div onClick={() => setNavOpen(false)} className="h-32 w-32 relative cursor-pointer ">
             <div className="h-44 -rotate-45 origin-top absolute w-0.5 bg-lime-300"></div>
             <div className="h-44 right-0 rotate-45 origin-top absolute w-0.5 bg-lime-300"></div>
           </div>
