@@ -1,13 +1,13 @@
 import { Link, Route, Routes } from 'react-router-dom'
 import Home from './Pages/Home.jsx'
 import Agence from './Pages/Agence.jsx'
-import Projects from './Pages/Projects.jsx'
+import Projects from './Pages/Project.jsx'
 import Navbar from './components/Navigation/Navbar.jsx'
 import FullScreenNav from './components/Navigation/FullScreenNav.jsx'
 
 const App = () => {
   return (
-    <div>
+    <div className='overflow-x-hidden'>
       {/* <Link className="text-gray-600 hover:text-indigo-600 transition-all duration-300 font-medium mx-4 hover:scale-105" to="/">
   Home
 </Link>
