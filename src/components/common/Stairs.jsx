@@ -3,6 +3,9 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { useLocation } from "react-router-dom";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const Stairs = (props) => {
   const currentPath = useLocation().pathname;
@@ -42,18 +45,20 @@ const Stairs = (props) => {
     });
     tl.from(pageRef.current, {
       opacity: 0,
-      scale: 1.1,
+      // scale: 1.03,
       duration: 0.8,
       ease: "power3.out",
+    });
+    tl.call(() => {
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+      });
     });
   }, [currentPath]);
 
   return (
     <div>
-      <div
-        ref={stairParentRef}
-        className="h-screen w-full fixed top-0 "
-      >
+      <div ref={stairParentRef} className="fixed inset-0 z-[9999] h-screen w-full pointer-events-none">
         <div className="h-full w-full flex">
           <div className="stair h-full w-1/5 bg-black"></div>
           <div className="stair h-full w-1/5 bg-black"></div>

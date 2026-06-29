@@ -2,6 +2,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import React, { useContext, useRef } from "react";
 import { NavbarContext } from "../Context/NavbarContext";
+import { useNavigate } from 'react-router-dom'
 
 const FullScreenNav = () => {
   const fullNavLinksRef = useRef(null);
@@ -9,6 +10,7 @@ const FullScreenNav = () => {
   const [navOpen, setNavOpen] = useContext(NavbarContext);
 
   const tl = gsap.timeline();
+  const navigate = useNavigate()
 
   function gsapAnimation() {
     const tl = gsap.timeline();
@@ -39,7 +41,7 @@ const FullScreenNav = () => {
     });
     tl.to(".stairing", {
       height: 0,
-      stagger: { amount: -0 },
+      stagger: { amount: -0.25 },
     });
     tl.to(".navlink", {
       opacity: 0,
@@ -102,7 +104,7 @@ const FullScreenNav = () => {
         </div>
         <div className="py-36">
           <div className="link origin-top relative border-t-1 border-white ">
-            <h1 className="font-[font-2] lg:text-[7vw] text-[5vw] uppercase lg:leading-[0.8] lg:pt-5 pt-2 text-center">
+            <h1 onClick={() => { navigate('/projects'); setNavOpen(false) }} className="font-[font-2] lg:text-[7vw] text-[5vw] uppercase lg:leading-[0.8] lg:pt-5 pt-2 text-center relative z-10">
               Projets
             </h1>
             <div className="moveLink absolute flex top-0 text-black bg-lime-300">
@@ -146,7 +148,7 @@ const FullScreenNav = () => {
           </div>
 
           <div className="link origin-top relative border-t-1 border-white ">
-            <h1 className="font-[font-2] lg:text-[7vw] uppercase lg:leading-[0.8] lg:pt-5 pt-2 text-center">
+            <h1 onClick={() => { navigate('/agence'); setNavOpen(false) }} className="font-[font-2] lg:text-[7vw] uppercase lg:leading-[0.8] lg:pt-5 pt-2 text-center relative z-10">
               Agence
             </h1>
             <div className="moveLink absolute flex top-0 text-black bg-lime-300">
@@ -190,7 +192,7 @@ const FullScreenNav = () => {
           </div>
 
           <div className="link origin-top relative border-t-1 border-white ">
-            <h1 className="font-[font-2] lg:text-[7vw] text-[5vw] uppercase lg:leading-[0.8] lg:pt-5 pt-2 text-center">
+            <h1 className="font-[font-2] lg:text-[7vw] text-[5vw] uppercase lg:leading-[0.8] lg:pt-5 pt-2 text-center relative z-10">
               Contacts
             </h1>
             <div className="moveLink absolute flex top-0 text-black bg-lime-300">
@@ -234,7 +236,7 @@ const FullScreenNav = () => {
           </div>
 
           <div className="link origin-top relative  border-y-1 border-white ">
-            <h1 className="font-[font-2] lg:text-[7vw] text-[5vw] uppercase lg:leading-[0.8] lg:pt-5 pt-2 text-center">
+            <h1 className="font-[font-2] lg:text-[7vw] text-[5vw] uppercase lg:leading-[0.8] lg:pt-5 pt-2 text-center relative z-10">
               Blog
             </h1>
             <div className="moveLink absolute flex top-0 text-black bg-lime-300">
